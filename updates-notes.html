@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pinned GMail</title>
+    <style>
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        background-color: #e9ecef;
+      }
+      header, main {
+        border-radius: 9px;
+        margin-left: 10%;
+        margin-right: 10%;
+        padding: 10px;
+      }
+      header {
+        background-color: #0f1126;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+      main {
+        background-color: #ffffff;
+      }
+      h1, h2 {
+        text-align: center;
+      }
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #aleIcon {
+        display: contents;
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+      <header>
+          <h1>Notes of the update to WebExtension</h1>
+          <h2>GMail Panel now is Pinned GMail</h2>
+          <img src="icons/gmail-128.png" />
+        </header>
+    <main>
+      
+      <p>
+        Hi and thanks for using my addon all over these years!<br>
+        <br>
+        You will have noticed that with the last major Firefox update the addon stopped working.<br>
+        This was because the Legacy addons are no longer supported and I had to port my code (rewrite almost everything from scratch) to the new WebExtensions technology.<br>
+        <br>
+        With the new WebExtensions it can't be done everything what the Legacy addons could did.<br>
+        Now the panels are loaded every time they are opened. I think with this, the panel lose all the functionality that had in the past for my addon.<br>
+        For this reason, I decided to use the pinned tabs. Now when the button is clicked a pinned tab will be open (or if you already has it, it will be activated). The same if you use the keyboard shortcut. If you click again, you will return to the previous tab (the same with the keyboard shortcut).<br>
+        About the <strong>keyboard shortcut</strong>, again, with the WebExtensions has been lose the ability to configurate it. So, I set the combination that I use: <strong>Alt+W</strong>. I hope this could be configurable in the future, but all depends on Mozilla.<br>
+        <br>
+        Well I hope this has not bored you and (i think) will be the only one time I'll bother you with a message like this. I'm sorry if I did and/or if you are dissapointed with the change. This is the best approach I could find.<br>
+        <br>
+        As always, any comment or suggestion you may have, feel free to contact me: <a href="mailto:alejandrosbrizuela@gmail.com?Subject=Pinned%20GMail%20support">alejandrosbrizuela@gmail.com</a>.<br>
+        <br>
+        <strong>Lastly, if you feel so and want to help me, <a href="https://www.paypal.me/alesbrizuela/2" target="_blank">please consider to make a donation</a>.</strong><br>
+        <br>
+        I will be very grateful!<br>
+        <br>
+        <i>
+          Saludos!<br>
+          Alejandro S. Brizuela<br>
+        </i>
+        <img id="aleIcon" src="/icons/ale.png">
+      </p>
+    </main>
+  </body>
+</html>

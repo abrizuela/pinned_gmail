@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        font-size: 1.25em;
+      }
+      #checkMailTime {
+        width: 3em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      <h3>Pinned GMail options</h3>
+      <label>Check emails every</label>
+      <input id="checkMailTime" type="number" name="checkMailTime" min="1" max="60">
+      <label>minutes</label>
+      <br>
+      <input id="showNotifications" type="checkbox" name="showNotifications" >
+      <label>Show notifications</label>
+      <br>
+      <input id="repetitiveNotifications" type="checkbox" name="notificationsRepetitive" >
+      <label>Show the notifications repeatedly</label>
+      <br>
+      <label>Keyboard shortcut</label>
+      <input type="text" id="shortcut" >
+      <button id="update">Update</button>
+      <button id="reset">Reset</button>
+    </form>
+
+    <script src="/options/options.js"></script>
+
+  </body>
+
+</html>
