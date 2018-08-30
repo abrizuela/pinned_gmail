@@ -7,7 +7,7 @@
 
   "manifest_version": 2,
   "name": "Pinned GMail",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Go to the pinned Gmail tab. If it doesn't exist, it's created.",
 
   "icons": {

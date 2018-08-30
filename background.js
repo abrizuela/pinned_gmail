@@ -38,7 +38,7 @@ function handleSearch(gmailTabs) {
       previousTab = currentTabId;
       browser.tabs.update(gmailTabId, {active: true,});
     }
-    setButtonIcon(gmailTabs[0].favIconTitle);
+    setButtonIcon(gmailTabs[0].favIconUrl);
   } else {
     //console.log("there is NO gmail tab");
     previousTab = currentTabId;
@@ -130,7 +130,7 @@ function checkMail(gmailTabs) {
       //console.log("there is " + unreadMails + " unread emails");
     };
     
-    setButtonIcon(gmailTabs[0].favIconTitle)
+    setButtonIcon(gmailTabs[0].favIconUrl)
   } else {
     //console.log("there is NO gmail tab");
   }
