@@ -38,7 +38,7 @@ function handleSearch(gmailTabs) {
       previousTab = currentTabId;
       browser.tabs.update(gmailTabId, {active: true,});
     }
-    setButtonIcon(gmailTabs[0].favIconUrl);
+    setButtonIcon(gmailTabs[0].favIconTitle);
   } else {
     //console.log("there is NO gmail tab");
     previousTab = currentTabId;
@@ -70,7 +70,7 @@ function showNotificationPopup(unreadMails){
   content = "Unread email(s): " + unreadMails;
   browser.notifications.create({
     "type": "basic",
-    "iconUrl": browser.extension.getURL("icons/gmail-48-"+unreadMails+".png"),
+    "iconUrl": browser.extension.getURL("icons/gmail-48.png"),
     "title": "Pinned Gmail",
     "message": content
   });
@@ -109,13 +109,13 @@ function checkMail(gmailTabs) {
   //console.log("*********checking mail*********");
   if(gmailTabs.length > 0) {
     //console.log("there is a gmail tab");
-    var faviconURL = gmailTabs[0].favIconUrl;
-    //console.log("favIconUrl: " + faviconURL)
-    if ((faviconURL.search("0.png") > -1)){ //If it's = -1 means that there are unread emails.
+    var faviconTitle = gmailTabs[0].title;
+    //console.log("favIconTitle: " + faviconTitle)
+    if (!faviconTitle.includes(') - ')) {
       previousUnreadMails = 0;
       //console.log("there is 0 unread emails");
     } else {
-      var unreadMails = faviconURL.split('unreadcountfavicon/')[1].split('.png')[0];
+      var unreadMails = faviconTitle.split('(')[1].split(')')[0];
       browser.storage.local.get().then(function(item){
         var showNotifications = true;
         if(item.showNotifications !== undefined) {
@@ -130,7 +130,7 @@ function checkMail(gmailTabs) {
       //console.log("there is " + unreadMails + " unread emails");
     };
     
-    setButtonIcon(gmailTabs[0].favIconUrl)
+    setButtonIcon(gmailTabs[0].favIconTitle)
   } else {
     //console.log("there is NO gmail tab");
   }
