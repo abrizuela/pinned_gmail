@@ -1,0 +1,45 @@
+body {
+    font-size: 1.25em;
+}
+
+#checkMailTime {
+    width: 3em;
+}
+
+#updatedMessage,
+#reset {
+    color: #ffffff;
+    border-radius: 3px;
+}
+
+#updatedMessage {
+    background-color: #27aa27;
+    border-color: #008000;
+    transition: 1s ease;
+    display: table;
+    padding: 3px 10px;
+    font-weight: bold;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#reset {
+    background-color: #f04e4e;
+    border-color: #f04e4e;
+    padding: 1px 10px;
+}
+
+#errorMessage {
+    color: #f04e4e;
+    font-weight: bold;
+    transition: 1s ease;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.shown {
+    opacity: 1;
+}
