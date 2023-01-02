@@ -17,6 +17,7 @@ async function updateUI() {
             shortcutElem.value = command.shortcut;
         }
     }
+    disableCheckbox();
 }
 
 /**
@@ -67,46 +68,31 @@ async function resetShortcut() {
     msgUpdated();
 }
 
-/**
- * Update the UI when the page loads.
- */
-document.addEventListener('DOMContentLoaded', updateUI);
-
 function disableCheckbox() {
-    if (showNotifications.checked) {
-        repetitiveNotifications.disabled = false;
-    } else {
-        repetitiveNotifications.disabled = true;
-    }
+    repetitiveNotifications.disabled = !showNotifications.checked;
 };
 
 /**
  * Check Mail time
  */
-browser.storage.local.get("checkMailTime").then(function (item) {
-    checkMailTime.value = item.checkMailTime || 1;
+browser.storage.sync.get("checkMailTime").then(function (item) {
+    checkMailTime.value = item.checkMailTime ??= 1;
 });
 
 checkMailTime.onchange = function (e) {
-    browser.storage.local.set({ checkMailTime: this.value });
+    browser.storage.sync.set({ checkMailTime: this.value });
     msgUpdated();
 }
 
 /**
  * Show Notifications
  */
-browser.storage.local.get("showNotifications").then(function (item) {
-    if (item.showNotifications === undefined || item.showNotifications === true) {
-        showNotifications.checked = true;
-    }
+browser.storage.sync.get("showNotifications").then(function (item) {
+    showNotifications.checked = item.showNotifications ??= true;
 });
 
 showNotifications.onchange = function (e) {
-    if (this.checked) {
-        browser.storage.local.set({ showNotifications: true });
-    } else {
-        browser.storage.local.set({ showNotifications: false });
-    }
+    browser.storage.sync.set({ showNotifications: this.checked });
     disableCheckbox();
     msgUpdated();
 };
@@ -114,22 +100,19 @@ showNotifications.onchange = function (e) {
 /**
  * Repetitive Notifications
  */
-browser.storage.local.get("repetitiveNotifications").then(function (item) {
-    if (item.repetitiveNotifications === true) {
-        repetitiveNotifications.checked = true;
-    }
+browser.storage.sync.get("repetitiveNotifications").then(function (item) {
+    repetitiveNotifications.checked = item.repetitiveNotifications;
 });
 
 repetitiveNotifications.onchange = function (e) {
-    if (this.checked) {
-        browser.storage.local.set({ repetitiveNotifications: true });
-    } else {
-        browser.storage.local.set({ repetitiveNotifications: false });
-    }
+    browser.storage.sync.set({ repetitiveNotifications: this.checked });
     msgUpdated();
 };
 
-document.addEventListener("DOMContentLoaded", function () { disableCheckbox(); }, false);
+/**
+ * Update the UI when the page loads.
+ */
+document.addEventListener('DOMContentLoaded', updateUI);
 
 /**
  * Handle update and reset button clicks
