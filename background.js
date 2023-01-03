@@ -70,7 +70,7 @@ function showNotificationPopup(unreadMails) {
     content = "Unread email(s): " + unreadMails;
     browser.notifications.create({
         "type": "basic",
-        "iconUrl": browser.extension.getURL("icons/gmail-48.png"),
+        "iconUrl": browser.runtime.getURL("icons/gmail-48.png"),
         "title": "Pinned Gmail",
         "message": content
     });
