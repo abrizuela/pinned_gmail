@@ -116,15 +116,9 @@ function checkMail(gmailTabs) {
             //console.log("there is 0 unread emails");
         } else {
             var unreadMails = faviconTitle.split('(')[1].split(')')[0];
-            browser.storage.local.get().then(function (item) {
-                var showNotifications = true;
-                if (item.showNotifications !== undefined) {
-                    showNotifications = item.showNotifications;
-                }
-                var repetitiveNotifications = false;
-                if (item.repetitiveNotifications !== undefined) {
-                    repetitiveNotifications = item.repetitiveNotifications;
-                }
+            browser.storage.sync.get().then(function (item) {
+                let showNotifications = item.showNotifications !== undefined ? item.showNotifications : true;
+                let repetitiveNotifications = item.repetitiveNotifications !== undefined ? item.repetitiveNotifications : false;
                 notificationHandler(unreadMails, showNotifications, repetitiveNotifications);
             });
             //console.log("there is " + unreadMails + " unread emails");
@@ -134,7 +128,7 @@ function checkMail(gmailTabs) {
     } else {
         //console.log("there is NO gmail tab");
     }
-    browser.storage.local.get("checkMailTime").then(function (item) {
+    browser.storage.sync.get("checkMailTime").then(function (item) {
         var checkMailTime = item.checkMailTime || 1;
         //console.log("checkMailTime: " + checkMailTime);
         setCheckMailTimeOut(checkMailTime);
@@ -143,15 +137,14 @@ function checkMail(gmailTabs) {
 
 function update(details) {
     if (details.reason === "install" || details.reason === "update") {
-        var opening = browser.runtime.openOptionsPage();
-        opening.then(onOpened, onError);
+        browser.runtime.openOptionsPage();
     }
 };
 
 browser.browserAction.onClicked.addListener(handleClick);
 browser.runtime.onInstalled.addListener(update);
 
-browser.storage.local.get("checkMailTime").then(function (item) {
+browser.storage.sync.get("checkMailTime").then(function (item) {
     var checkMailTime = item.checkMailTime || 1;
     setCheckMailTimeOut(checkMailTime);
 });
