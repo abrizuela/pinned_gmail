@@ -3,7 +3,8 @@ body {
 }
 
 #checkMailTime {
-    width: 3em;
+    width: 45px;
+    text-align: center;
 }
 
 #updatedMessage,
