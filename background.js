@@ -1,6 +1,9 @@
 let currentTabId;
+let currentWinId;
 let gmailTabId;
+let gmailWinId;
 let previousTab;
+let previousWin;
 let previousUnreadMails = 0;
 
 function onError(e) {
@@ -30,25 +33,32 @@ function handleSearch(gmailTabs) {
     if (gmailTabs.length > 0) {
         //console.log("there is a gmail tab");
         gmailTabId = gmailTabs[0].id;
+        gmailWinId = gmailTabs[0].windowId;
         if (gmailTabId === currentTabId) {
             //console.log("I'm in the gmail tab");
+            browser.windows.update(previousWin, { focused: true, });
             browser.tabs.update(previousTab, { active: true, });
         } else {
             //console.log("I'm NOT in the gmail tab");
             previousTab = currentTabId;
+            previousWin = currentWinId;
+            browser.windows.update(gmailWinId, { focused: true, });
             browser.tabs.update(gmailTabId, { active: true, });
         }
         setButtonIcon(gmailTabs[0].favIconUrl);
     } else {
         //console.log("there is NO gmail tab");
         previousTab = currentTabId;
+        previousWin = currentWinId;
         createPinnedTab();
     }
 };
 
 function handleClick(tab) {
     //console.log("*********Button clicked*********");
+    
     currentTabId = tab.id;
+    currentWinId = tab.windowId;
     var querying = browser.tabs.query({ url: "*://mail.google.com/*" });
     querying.then(handleSearch, onError);
 };
