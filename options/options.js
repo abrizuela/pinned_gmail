@@ -12,7 +12,7 @@ const checkMailTime = document.querySelector("#checkMailTime");
  */
 async function updateUI() {
     let commands = await browser.commands.getAll();
-    for (command of commands) {
+    for (let command of commands) {
         if (command.name === commandName) {
             shortcutElem.value = command.shortcut;
         }
