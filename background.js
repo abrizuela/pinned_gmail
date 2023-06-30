@@ -54,11 +54,17 @@ function handleSearch(gmailTabs) {
     }
 };
 
-function handleClick(tab) {
+async function handleClick(tab) {
     //console.log("*********Button clicked*********");
-    
+
+    if (tab.id === undefined) {
+        let activeTab = await browser.tabs.query({ currentWindow: true, active: true });
+        tab = activeTab[0];
+    };
+
     currentTabId = tab.id;
     currentWinId = tab.windowId;
+
     var querying = browser.tabs.query({ url: "*://mail.google.com/*" });
     querying.then(handleSearch, onError);
 };
